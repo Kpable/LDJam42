@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator DropOffGift()
     {
         GameObject gift = Instantiate(giftPrefab, dropOffPoint.position, Quaternion.identity);
+        gift.transform.localScale = new Vector3(gifts[giftIndex].width, 1, gifts[giftIndex].length);
         var giftProperties = gift.GetComponent<Gift>();
         giftProperties.Properties = gifts[giftIndex];
         giftIndex++;
