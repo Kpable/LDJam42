@@ -24,6 +24,7 @@ public class Target : MonoBehaviour {
         pos.z = Mathf.RoundToInt(pos.z);
         transform.position = pos;
 
+        // pick up
         if (Input.GetMouseButtonDown(0))
         {
             Collider[] hits = Physics.OverlapBox(pos, new Vector3(0.5f, 0.5f, 0.5f));
@@ -35,8 +36,28 @@ public class Target : MonoBehaviour {
                     Debug.Log(name + " triggered by " + hits[i].name);
                     if (hits[i].CompareTag("Movable"))
                     {
-                        playerScript.ToggleCarry(hits[i]);
+                        //playerScript.ToggleCarry(hits[i]);
                         
+                    }
+                }
+
+            }
+        }
+
+        // open
+        if (Input.GetMouseButtonDown(1))
+        {
+            Collider[] hits = Physics.OverlapBox(pos, new Vector3(0.5f, 0.5f, 0.5f));
+
+            if (hits.Length > 0)
+            {
+                for (int i = 0; i < hits.Length; i++)
+                {
+                    Debug.Log(name + " triggered by " + hits[i].name);
+                    if (hits[i].CompareTag("Movable"))
+                    {
+                        //playerScript.ToggleCarry(hits[i]);
+
                     }
                 }
 

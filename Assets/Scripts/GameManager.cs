@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour {
     IEnumerator DropOffGift()
     {
         GameObject gift = Instantiate(giftPrefab, dropOffPoint.position, Quaternion.identity);
-        gift.transform.localScale = new Vector3(gifts[giftIndex].width, 1, gifts[giftIndex].length);
-        var giftProperties = gift.GetComponent<Gift>();
+        //gift.transform.localScale = new Vector3(gifts[giftIndex].width, 1, gifts[giftIndex].length);
+        var giftProperties = gift.GetComponent<PlaceableObject>();
         giftProperties.Properties = gifts[giftIndex];
         giftIndex++;
         if (giftIndex < gifts.Length)
@@ -43,6 +43,7 @@ public class ApartmentObject
     public int width;
     public int length;
     public Vector2 Size { get { return new Vector2(width, length); } }
+    public GameObject prefab;
 }
 
 public enum PlacableOn { Floor, Furniture, Wall, Shelf }
