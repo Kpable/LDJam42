@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public float speed = 10f;
     public GameObject carying;
-
+    public Transform target;
 	// Use this for initialization
 	void Start () {
 		
@@ -39,7 +39,25 @@ public class Player : MonoBehaviour {
 
     public void ToggleCarry(Collider movable)
     {
-        carying = movable.gameObject;
-        carying.transform.SetParent(transform);
+        if (carying)
+        {
+            carying.transform.position = target.position;
+            carying.transform.rotation = target.rotation;
+            carying.transform.SetParent(null);
+            carying = null;
+        }
+        else
+        {
+            carying = movable.gameObject;
+            carying.transform.position = target.position;
+            carying.transform.rotation = target.rotation;
+            carying.transform.SetParent(transform);
+        }
+        
+    }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
     }
 }

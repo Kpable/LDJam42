@@ -13,7 +13,7 @@ public class Target : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-		
+        playerScript.SetTarget(transform);
 	}
 	
 	// Update is called once per frame
