@@ -19,6 +19,19 @@ public class Player : MonoBehaviour {
         pos.z += vAxis * speed * Time.deltaTime;
         transform.position = pos;
 
+        Ray ray;
+        RaycastHit hit;
+        Vector3 mousePos = Input.mousePosition;
+
+        ray = Camera.main.ScreenPointToRay(mousePos);
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.name == "Floor")
+            {
+                Debug.Log("Mouse Hit:" + hit.point);
+                transform.LookAt(hit.point);
+            }
+        }
 
     }
 }
