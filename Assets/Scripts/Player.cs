@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
         {
             if (hit.collider.name == "Floor")
             {
-                Debug.Log("Mouse Hit:" + hit.point);
+                //Debug.Log("Mouse Hit:" + hit.point);
                 transform.LookAt(hit.point);
             }
         }
