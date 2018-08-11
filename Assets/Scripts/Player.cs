@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public float speed = 10f; 
+    public float speed = 10f;
+    public GameObject carying;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -33,5 +35,11 @@ public class Player : MonoBehaviour {
             }
         }
 
+    }
+
+    public void ToggleCarry(Collider movable)
+    {
+        carying = movable.gameObject;
+        carying.transform.SetParent(transform);
     }
 }

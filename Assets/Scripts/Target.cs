@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
     public Transform player;
+    public Player playerScript;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerScript = player.GetComponent<Player>();
     }
     // Use this for initialization
     void Start () {
@@ -33,7 +35,8 @@ public class Target : MonoBehaviour {
                     Debug.Log(name + " triggered by " + hits[i].name);
                     if (hits[i].CompareTag("Movable"))
                     {
-                        hits[i].transform.SetParent(player);
+                        playerScript.ToggleCarry(hits[i]);
+                        
                     }
                 }
 
