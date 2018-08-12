@@ -95,7 +95,7 @@ public class Player : MonoBehaviour {
                     //IsCollidingWithAnything(scale, pos);
                     //// Check area below
                     //IsOverFloor(scale, pos);
-                    if(!IsCollidingWithAnything(scale, pos) && IsOverFloor(scale, pos))
+                    if(IsCollidingWithAnything(scale, pos) || !IsOverFloor(scale, pos))
                     {
                         validationColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.4f);
                         valid = false;
@@ -118,7 +118,7 @@ public class Player : MonoBehaviour {
 
     private bool IsOverFloor(Vector3 scale, Vector3 pos)
     {
-        bool ret = false;
+        bool ret = true;
 
         Vector3[] pointsToCheck = new Vector3[Mathf.RoundToInt(scale.x * scale.z)];
         //Debug.Log("Points to check: " + pointsToCheck.Length);
@@ -134,7 +134,13 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < pointsToCheck.Length; i++)
         {
             Collider[] hits = Physics.OverlapBox(pointsToCheck[i], Vector3.one * 0.4f);
+            //Debug.Log("found " + hits.Length + " hits ");
 
+            //for (int u = 0; u < hits.Length; u++)
+            //{
+            //    Debug.Log("hit " + hits[u].name);
+            //}
+            ret = hits.Length > 0;
             for (int j = 0; j < hits.Length; j++)
             {
                 var surface = hits[j].GetComponent<Surface>();
