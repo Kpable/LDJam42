@@ -2209,6 +2209,10 @@ Prefab:
       propertyPath: gift.length
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1131777523778284, guid: 52a5119d2a15a4c4c9efb007d1db7c8f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52a5119d2a15a4c4c9efb007d1db7c8f, type: 2}
   m_IsPrefabAsset: 0
@@ -2461,10 +2465,6 @@ Prefab:
     - target: {fileID: 4523385118872770, guid: 484ba6292da8ec745be0f8126663211e, type: 2}
       propertyPath: m_RootOrder
       value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523385118872770, guid: 484ba6292da8ec745be0f8126663211e, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 484ba6292da8ec745be0f8126663211e, type: 2}
@@ -4814,8 +4814,8 @@ MonoBehaviour:
   gifts:
   - Name: Couch
     placeables: 00000000
-    width: 2
-    length: 1
+    width: 4
+    length: 2
     prefab: {fileID: 1780906739273084, guid: 484ba6292da8ec745be0f8126663211e, type: 2}
   - Name: Table
     placeables: 01000000
@@ -4825,7 +4825,7 @@ MonoBehaviour:
   - Name: Bed
     placeables: 00000000
     width: 3
-    length: 5
+    length: 4
     prefab: {fileID: 1632912110950944, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
   - Name: plant
     placeables: 0100000003000000

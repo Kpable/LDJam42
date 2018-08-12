@@ -68,10 +68,16 @@ public class Player : MonoBehaviour {
         {
             validator.SetActive(false);
 
-            carying.transform.position = validator.transform.position;
-            carying.transform.rotation = validator.transform.rotation;
+            var props = carying.GetComponent<PlaceableObject>().Properties;
+            GameObject apartmentObject = Instantiate(props.prefab, validator.transform.position, validator.transform.rotation);
+
+            carying.SetActive(false);
+            //carying.transform.position = validator.transform.position;
+            //carying.transform.rotation = validator.transform.rotation;
             carying.transform.SetParent(null);
             carying.transform.localScale = Vector3.one;
+
+
 
             carying = null;
         }
