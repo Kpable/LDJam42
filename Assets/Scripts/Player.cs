@@ -9,7 +9,9 @@ public class Player : MonoBehaviour {
     public Transform target;
     List<Collider> nearbyObjects;
     public GameObject validator;
-    
+    bool canPlace = true;
+
+    Vector3 debugCube, debugSize;
     
 	// Use this for initialization
 	void Start () {
@@ -42,14 +44,16 @@ public class Player : MonoBehaviour {
             }
         }
 
+        if (carying)
+        {
+            Vector3 validatorPos = validator.transform.position;
+            validatorPos.x = Mathf.RoundToInt(target.position.x + transform.forward.x);
+            validatorPos.z = Mathf.RoundToInt(target.position.z + transform.forward.z);
+            validator.transform.position = validatorPos;
 
-        Vector3 validatorPos = validator.transform.position;
-        validatorPos.x = Mathf.RoundToInt(target.position.x + transform.forward.x);
-        validatorPos.z = Mathf.RoundToInt(target.position.z + transform.forward.z);
-        validator.transform.position = validatorPos;
-
-        //RotateValidator();
-
+            Validate();
+            //RotateValidator();
+        }
         // pick up/putdown
         if (Input.GetMouseButtonDown(0))
         {
@@ -60,9 +64,58 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                ToggleCarry(carying);
+                if(canPlace)
+                    ToggleCarry(carying);
             }
 ;        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(debugCube, debugSize);
+    }
+
+    private void Validate()
+    {
+        Vector3 scale = validator.transform.localScale;
+        Vector3 pos = validator.transform.position;
+
+        Debug.Log("pos: " + pos + " scale: " + scale);
+        var props = carying.GetComponent<PlaceableObject>().Properties;
+
+        Color validationColor = new Color(Color.green.r, Color.green.g, Color.green.b, 0.4f);
+
+        bool valid = true;
+        for (int i = 0; i < props.placeables.Length; i++)
+        {
+            switch (props.placeables[i])
+            {
+                case PlacableOn.Floor:
+                    Collider[] hits = Physics.OverlapBox(new Vector3(pos.x + scale.x/2, pos.y, pos.z + scale.z/2), new Vector3(scale.x/2 - .01f, scale.y/2 - .01f, scale.z/2 - .01f));
+                    for (int j = 0; j < hits.Length; j++)
+                    {
+                        if (hits[j].CompareTag("Movable"))
+                        {
+                            Debug.Log("found " + j + " " + hits[j].name);
+                            validationColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.4f);
+                            valid = false;
+                        }
+                    }
+                    debugCube = new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2);
+                    debugSize = new Vector3(scale.x, scale.y, scale.z);
+                    break;
+                case PlacableOn.Furniture:
+                    break;
+                case PlacableOn.Wall:
+                    break;
+                case PlacableOn.Shelf:
+                    break;
+                default:
+                    break;
+            }
+        }
+        validator.transform.GetChild(0).GetComponent<Renderer>().material.color = validationColor;
+        canPlace = valid;
     }
 
     private void RotateValidator()
@@ -113,10 +166,10 @@ public class Player : MonoBehaviour {
             validator.transform.position = props.PrefabTransform.position;
             validator.transform.position += props.PositionOffset;
 
-            validator.transform.GetChild(0).localPosition = props.PrefabChildTransform.localPosition;
-            validator.transform.GetChild(0).localPosition += props.ChildOffset;
-            validator.transform.GetChild(0).localScale = props.PrefabChildTransform.localScale;
-            validator.transform.GetChild(0).rotation = props.PrefabChildTransform.rotation;
+            //validator.transform.GetChild(0).localPosition = props.PrefabChildTransform.localPosition;
+            //validator.transform.GetChild(0).localPosition += props.ChildOffset;
+            //validator.transform.GetChild(0).localScale = props.PrefabChildTransform.localScale;
+            //validator.transform.GetChild(0).rotation = props.PrefabChildTransform.rotation;
 
             validator.SetActive(true);
 

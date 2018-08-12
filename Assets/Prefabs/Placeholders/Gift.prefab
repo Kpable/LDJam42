@@ -108,3 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c58462dea9f9c74ebcb2109a2e58ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gift:
+    Name: 
+    placeables: 
+    width: 0
+    length: 0
+    prefab: {fileID: 0}
