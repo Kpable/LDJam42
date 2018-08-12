@@ -918,7 +918,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4322291385894444, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4322291385894444, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -926,7 +926,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4322291385894444, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4322291385894444, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -947,6 +947,18 @@ Prefab:
     - target: {fileID: 4322291385894444, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
       propertyPath: m_RootOrder
       value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828974210795848, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828974210795848, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828974210795848, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf7e793734e899f4199d6f5cc915121c, type: 2}
@@ -1714,7 +1726,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &502667559
 BoxCollider:
@@ -1834,35 +1846,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4648208186588132, guid: 1db3da906e908074d8de0e1bc61811b7,
     type: 2}
   m_PrefabInternal: {fileID: 565651722}
---- !u!1 &583316499
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 583316500}
-  m_Layer: 0
-  m_Name: BedContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &583316500
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 583316499}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0, z: -5}
-  m_LocalScale: {x: 3, y: 1, z: 4}
-  m_Children:
-  - {fileID: 1438429164}
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &606266888
 Prefab:
   m_ObjectHideFlags: 0
@@ -3553,91 +3536,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1438429163
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1438429164}
-  - component: {fileID: 1438429167}
-  - component: {fileID: 1438429166}
-  - component: {fileID: 1438429165}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1438429164
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1438429163}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 583316500}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1438429165
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1438429163}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1438429166
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1438429163}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1438429167
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1438429163}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1510062328
 Prefab:
   m_ObjectHideFlags: 0
@@ -3960,6 +3858,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4648208186588132, guid: 1db3da906e908074d8de0e1bc61811b7,
     type: 2}
   m_PrefabInternal: {fileID: 1624982462}
+--- !u!1001 &1650095629
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337021303281996, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1658674057
 Prefab:
   m_ObjectHideFlags: 0
@@ -4876,27 +4816,27 @@ MonoBehaviour:
     placeables: 00000000
     width: 2
     length: 1
-    prefab: {fileID: 0}
-  - Name: Pot
+    prefab: {fileID: 1780906739273084, guid: 484ba6292da8ec745be0f8126663211e, type: 2}
+  - Name: Table
     placeables: 01000000
-    width: 1
-    length: 1
-    prefab: {fileID: 0}
+    width: 2
+    length: 2
+    prefab: {fileID: 1260558141360878, guid: 870bfaabb2b04034e80571d4e5a76997, type: 2}
   - Name: Bed
     placeables: 00000000
     width: 3
     length: 5
-    prefab: {fileID: 0}
+    prefab: {fileID: 1632912110950944, guid: 620a1f0112f661f43878b54da90678d8, type: 2}
   - Name: plant
     placeables: 0100000003000000
     width: 1
     length: 1
-    prefab: {fileID: 0}
+    prefab: {fileID: 1475347542999112, guid: a3238906fb5c615498bbdc8a300dcdf0, type: 2}
   - Name: Poster
     placeables: 02000000
     width: 2
     length: 2
-    prefab: {fileID: 0}
+    prefab: {fileID: 1331750077887792, guid: d4c6b00546088ea4b960293dc7b2f975, type: 2}
   dropOffPoint: {fileID: 1881244523}
   giftPrefab: {fileID: 1131777523778284, guid: 52a5119d2a15a4c4c9efb007d1db7c8f, type: 2}
 --- !u!4 &1935592443

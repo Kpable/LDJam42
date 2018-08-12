@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     List<Collider> nearbyObjects;
     public GameObject validator;
     
+    
 	// Use this for initialization
 	void Start () {
         nearbyObjects = new List<Collider>();
@@ -42,8 +43,8 @@ public class Player : MonoBehaviour {
 
         
         Vector3 validatorPos = target.position;
-        validatorPos.x = Mathf.RoundToInt(transform.forward.x);
-        validatorPos.z = Mathf.RoundToInt(transform.forward.z);
+        validatorPos.x = Mathf.RoundToInt(target.position.x + transform.forward.x);
+        validatorPos.z = Mathf.RoundToInt(target.position.z + transform.forward.z);
         validator.transform.position = validatorPos;
 
         // pick up/putdown
@@ -67,20 +68,24 @@ public class Player : MonoBehaviour {
         {
             validator.SetActive(false);
 
-            carying.transform.position = target.position;
-            carying.transform.rotation = target.rotation;
+            carying.transform.position = validator.transform.position;
+            carying.transform.rotation = validator.transform.rotation;
             carying.transform.SetParent(null);
+            carying.transform.localScale = Vector3.one;
+
             carying = null;
         }
         else // Not Carrying
         {
             var props = movable.GetComponent<PlaceableObject>().Properties;
             validator.transform.localScale = new Vector3(props.width, 1, props.length);
+            validator.transform.GetChild(0).localPosition = props.Offset;
             validator.SetActive(true);
 
             carying = movable.gameObject;
             carying.transform.position = target.position;
             carying.transform.rotation = target.rotation;
+            carying.transform.localScale = Vector3.one * 0.3f;
             carying.transform.SetParent(transform);
         }
         
@@ -125,3 +130,5 @@ public class Player : MonoBehaviour {
         return nearest;
     }
 }
+
+

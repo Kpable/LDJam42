@@ -44,6 +44,27 @@ public class ApartmentObject
     public int length;
     public Vector2 Size { get { return new Vector2(width, length); } }
     public GameObject prefab;
+    public Vector3 Offset { get {
+            Vector3 off = Vector3.zero;
+            switch (placeables[0])
+            {
+                case PlacableOn.Floor:
+                    off = new Vector3(0.5f, 0, 0.5f);
+                    break;
+                case PlacableOn.Furniture:
+                    off = new Vector3(0.5f, 0, 0.5f);
+                    break;
+                case PlacableOn.Wall:
+                    off = new Vector3(0.5f, 0, 0.5f);
+                    break;
+                case PlacableOn.Shelf:
+                    off = new Vector3(0.5f, 0.5f, 0.5f);
+                    break;
+                default:
+                    break;
+            }
+            return off;
+        } }
 }
 
 public enum PlacableOn { Floor, Furniture, Wall, Shelf }
