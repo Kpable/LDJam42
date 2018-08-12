@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,6 +48,8 @@ public class Player : MonoBehaviour {
         validatorPos.z = Mathf.RoundToInt(target.position.z + transform.forward.z);
         validator.transform.position = validatorPos;
 
+        //RotateValidator();
+
         // pick up/putdown
         if (Input.GetMouseButtonDown(0))
         {
@@ -62,6 +65,30 @@ public class Player : MonoBehaviour {
 ;        }
     }
 
+    private void RotateValidator()
+    {
+        Vector3 rot = validator.transform.eulerAngles;
+        // to the left of the player
+        if (validator.transform.position.x < transform.position.x)
+        {
+            rot.y = -90;
+        }
+        else if (validator.transform.position.x > transform.position.x)
+        {
+            rot.y = 90;
+        }
+        if (validator.transform.position.y < transform.position.y)
+        {
+            rot.y = 0;
+        }
+        else if (validator.transform.position.y > transform.position.y)
+        {
+            rot.y = 180;
+        }
+        validator.transform.eulerAngles = rot;
+
+    }
+
     public void ToggleCarry(GameObject movable)
     {
         if (carying)
@@ -70,14 +97,12 @@ public class Player : MonoBehaviour {
 
             var props = carying.GetComponent<PlaceableObject>().Properties;
             GameObject apartmentObject = Instantiate(props.prefab, validator.transform.position, validator.transform.rotation);
-
+            apartmentObject.transform.GetChild(0).localPosition = props.ChildOffset;
             carying.SetActive(false);
             //carying.transform.position = validator.transform.position;
             //carying.transform.rotation = validator.transform.rotation;
             carying.transform.SetParent(null);
             carying.transform.localScale = Vector3.one;
-
-
 
             carying = null;
         }
@@ -85,8 +110,14 @@ public class Player : MonoBehaviour {
         {
             var props = movable.GetComponent<PlaceableObject>().Properties;
             validator.transform.localScale = new Vector3(props.width, 1, props.length);
-            validator.transform.position = props.PositionOffset;
-            validator.transform.GetChild(0).localPosition = props.ChildOffset;
+            validator.transform.position = props.PrefabTransform.position;
+            validator.transform.position += props.PositionOffset;
+
+            validator.transform.GetChild(0).localPosition = props.PrefabChildTransform.localPosition;
+            validator.transform.GetChild(0).localPosition += props.ChildOffset;
+            validator.transform.GetChild(0).localScale = props.PrefabChildTransform.localScale;
+            validator.transform.GetChild(0).rotation = props.PrefabChildTransform.rotation;
+
             validator.SetActive(true);
 
             carying = movable.gameObject;

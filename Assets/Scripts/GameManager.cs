@@ -44,6 +44,33 @@ public class ApartmentObject
     public int length;
     public Vector2 Size { get { return new Vector2(width, length); } }
     public GameObject prefab;
+    public Transform PrefabTransform { get { return prefab.transform; } }
+    public Transform PrefabChildTransform { get { return prefab.transform.GetChild(0); } }
+    public Vector3 ChildScaleOffset { get
+        {
+            Vector3 off = Vector3.one;
+
+            //switch (placeables[0])
+            //{
+            //    case PlacableOn.Floor:
+            //        break;
+            //    case PlacableOn.Furniture:
+                    
+            //        break;
+            //    case PlacableOn.Wall:
+            //        off = new Vector3(0.001f, 1, 1);
+
+            //        break;
+            //    case PlacableOn.Shelf:
+                    
+
+            //        break;
+            //    default:
+            //        break;
+            //}
+            off = prefab.transform.GetChild(0).localScale;
+            return off;
+        } }
     public Vector3 PositionOffset { get
         {
             Vector3 off = Vector3.zero;
@@ -81,10 +108,10 @@ public class ApartmentObject
                     off = new Vector3(0.5f, 0, 0.5f);
                     break;
                 case PlacableOn.Wall:
-                    off = new Vector3(0.5f, 0, 0.5f);
+                    off = new Vector3(0.5f, 0, 0);
                     break;
                 case PlacableOn.Shelf:
-                    off = new Vector3(0.5f, 0.5f, 0.5f);
+                    off = new Vector3(0.5f, 0.6f, 0.5f);
                     break;
                 default:
                     break;
