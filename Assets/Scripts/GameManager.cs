@@ -44,7 +44,33 @@ public class ApartmentObject
     public int length;
     public Vector2 Size { get { return new Vector2(width, length); } }
     public GameObject prefab;
-    public Vector3 Offset { get {
+    public Vector3 PositionOffset { get
+        {
+            Vector3 off = Vector3.zero;
+
+            switch (placeables[0])
+            {
+                case PlacableOn.Floor:
+                    break;
+                case PlacableOn.Furniture:
+                    off = new Vector3(0, 1, 0);
+                    break;
+                case PlacableOn.Wall:
+                    off = new Vector3(0, 2, 0);
+
+                    break;
+                case PlacableOn.Shelf:
+                    off = new Vector3(0, 2, 0);
+
+                    break;
+                default:
+                    break;
+            }
+            return off;
+
+        }
+    }
+    public Vector3 ChildOffset { get {
             Vector3 off = Vector3.zero;
             switch (placeables[0])
             {

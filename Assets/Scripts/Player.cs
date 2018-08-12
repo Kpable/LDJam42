@@ -41,8 +41,8 @@ public class Player : MonoBehaviour {
             }
         }
 
-        
-        Vector3 validatorPos = target.position;
+
+        Vector3 validatorPos = validator.transform.position;
         validatorPos.x = Mathf.RoundToInt(target.position.x + transform.forward.x);
         validatorPos.z = Mathf.RoundToInt(target.position.z + transform.forward.z);
         validator.transform.position = validatorPos;
@@ -85,7 +85,8 @@ public class Player : MonoBehaviour {
         {
             var props = movable.GetComponent<PlaceableObject>().Properties;
             validator.transform.localScale = new Vector3(props.width, 1, props.length);
-            validator.transform.GetChild(0).localPosition = props.Offset;
+            validator.transform.position = props.PositionOffset;
+            validator.transform.GetChild(0).localPosition = props.ChildOffset;
             validator.SetActive(true);
 
             carying = movable.gameObject;
