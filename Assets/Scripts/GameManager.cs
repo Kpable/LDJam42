@@ -108,7 +108,7 @@ public class ApartmentObject
                     off = new Vector3(0.5f, 0, 0.5f);
                     break;
                 case PlacableOn.Wall:
-                    off = new Vector3(0.5f, 0, 0);
+                    off = new Vector3(0.5f, 0, 0.5f);
                     break;
                 case PlacableOn.Shelf:
                     off = new Vector3(0.5f, 0.6f, 0.5f);

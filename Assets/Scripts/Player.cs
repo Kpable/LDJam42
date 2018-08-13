@@ -115,6 +115,8 @@ public class Player : MonoBehaviour {
                 {
                     if(placedOnAble == PlacableOn.Wall)
                         pointsToCheck[index] = new Vector3(pos.x + x + 0.5f, pos.y, pos.z + z + 0.5f);
+                    else if(placedOnAble == PlacableOn.Shelf)
+                        pointsToCheck[index] = new Vector3(pos.x + x + 0.5f, pos.y - 0.25f, pos.z + z + 0.5f);
                     else
                         pointsToCheck[index] = new Vector3(pos.x + x + 0.5f, pos.y - 1, pos.z + z + 0.5f);
                     //Debug.Log("pointToCheck: " + pointsToCheck[x + z]);
@@ -125,7 +127,7 @@ public class Player : MonoBehaviour {
             int validPoints = 0;
             for (int i = 0; i < pointsToCheck.Length; i++)
             {
-                Collider[] hits = Physics.OverlapBox(pointsToCheck[i], Vector3.one * 0.3f);
+                Collider[] hits = Physics.OverlapBox(pointsToCheck[i], Vector3.one * 0.45f);
                 //Debug.Log("found " + hits.Length + " hits ");
 
                 //for (int u = 0; u < hits.Length; u++)
@@ -133,27 +135,16 @@ public class Player : MonoBehaviour {
                 //    Debug.Log("hit " + hits[u].name);
                 //}
                 debugCube = pointsToCheck[i];
-                debugSize = Vector3.one * 0.3f;
+                debugSize = Vector3.one * 0.45f;
                 if (hits.Length == 0) break;
                 for (int j = 0; j < hits.Length; j++)
                 {
                     var surface = hits[j].GetComponent<Surface>();
                     if (surface != null)
                     {
-                        //bool validSurface = false;
-                        //PlacableOn[] canBePlacedOn = carying.GetComponent<PlaceableObject>().Properties.placeables;
-                        //for (int k = 0; k < canBePlacedOn.Length; k++)
-                        //{
-                        //if(surface.type == canBePlacedOn[k])
+
                         if (surface.type == placedOnAble)
                         {
-                            //validSurface = true;
-                            //break;
-                        //}
-                        //}
-                        //if at least one valid surface was found for this point, we're good
-                        //if (validSurface)
-                        //{
                             validPoints++;
                             break;
                         }
@@ -178,7 +169,7 @@ public class Player : MonoBehaviour {
             Collider[] hits = Physics.OverlapBox(new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2), new Vector3(scale.x / 2 - .01f, scale.y / 2 - .01f, scale.z / 2 - .01f));
             for (int j = 0; j < hits.Length; j++)
             {
-                if (hits[j].CompareTag("Movable") && placedOnAble != PlacableOn.Wall)
+                if (hits[j].CompareTag("Movable") && placedOnAble != PlacableOn.Wall && placedOnAble != PlacableOn.Shelf)
                 {
                     //Debug.Log("found " + j + " " + hits[j].name);
                     ret = true;
@@ -224,7 +215,8 @@ public class Player : MonoBehaviour {
 
             var props = carying.GetComponent<PlaceableObject>().Properties;
             GameObject apartmentObject = Instantiate(props.prefab, validator.transform.position, validator.transform.rotation);
-            apartmentObject.transform.GetChild(0).localPosition = props.ChildOffset;
+            if(Array.IndexOf(props.placeables, PlacableOn.Wall) == -1)
+                apartmentObject.transform.GetChild(0).localPosition = props.ChildOffset;
             carying.SetActive(false);
             //carying.transform.position = validator.transform.position;
             //carying.transform.rotation = validator.transform.rotation;
@@ -241,7 +233,7 @@ public class Player : MonoBehaviour {
             validator.transform.position += props.PositionOffset;
 
             //validator.transform.GetChild(0).localPosition = props.PrefabChildTransform.localPosition;
-            //validator.transform.GetChild(0).localPosition += props.ChildOffset;
+            validator.transform.GetChild(0).localPosition = props.ChildOffset;
             //validator.transform.GetChild(0).localScale = props.PrefabChildTransform.localScale;
             //validator.transform.GetChild(0).rotation = props.PrefabChildTransform.rotation;
 
