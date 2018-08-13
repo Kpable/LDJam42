@@ -38,7 +38,7 @@
 ![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/valid-shelfing-through-the-wall.gif)
 
 ### On Furniture Invalid
-![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/on-furniture-invalid.gif)
+![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/on-furniture-Invalid.gif)
 
 ### Furniture Partial Invalid
 ![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/furniture-partial-invalid.gif)
