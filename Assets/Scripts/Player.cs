@@ -103,6 +103,11 @@ public class Player : MonoBehaviour {
                     
                     break;
                 case PlacableOn.Furniture:
+                    if (IsCollidingWithAnything(scale, pos) || !IsOverFloor(scale, pos))
+                    {
+                        validationColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.4f);
+                        valid = false;
+                    }
                     break;
                 case PlacableOn.Wall:
                     break;
@@ -118,7 +123,7 @@ public class Player : MonoBehaviour {
 
     private bool IsOverFloor(Vector3 scale, Vector3 pos)
     {
-        bool ret = true;
+        bool ret = false;
 
         Vector3[] pointsToCheck = new Vector3[Mathf.RoundToInt(scale.x * scale.z)];
         //Debug.Log("Points to check: " + pointsToCheck.Length);
@@ -127,22 +132,25 @@ public class Player : MonoBehaviour {
         {
             for (int z = 0; z < scale.z; z++)
             {
-                pointsToCheck[index] = new Vector3(pos.x+x, pos.y - 1, pos.z+z);
+                pointsToCheck[index] = new Vector3(pos.x+x + 0.5f, pos.y - 1, pos.z+z + 0.5f);
                 //Debug.Log("pointToCheck: " + pointsToCheck[x + z]);
                 index++;
             }            
         }
 
+        int validPoints = 0;
         for (int i = 0; i < pointsToCheck.Length; i++)
         {
-            Collider[] hits = Physics.OverlapBox(pointsToCheck[i], Vector3.one * 0.4f);
+            Collider[] hits = Physics.OverlapBox(pointsToCheck[i], Vector3.one * 0.3f);
             //Debug.Log("found " + hits.Length + " hits ");
 
             //for (int u = 0; u < hits.Length; u++)
             //{
             //    Debug.Log("hit " + hits[u].name);
             //}
-            ret = hits.Length > 0;
+            debugCube = pointsToCheck[i];
+            debugSize = Vector3.one * 0.3f;
+            if (hits.Length == 0) break;
             for (int j = 0; j < hits.Length; j++)
             {
                 var surface = hits[j].GetComponent<Surface>();
@@ -158,16 +166,16 @@ public class Player : MonoBehaviour {
                             break;
                         }
                     }
-
-                    if ( !validSurface )
+                    //if at least one valid surface was found for this point, we're good
+                    if ( validSurface )
                     {
-                        ret = false;
+                        validPoints++;
                         break;
                     }
                 }
             }
         }
-
+        ret = validPoints == pointsToCheck.Length;
 
         Debug.Log("IsOverFLoor: " + ((ret) ? "true" : "false"));
         return ret; 
@@ -186,8 +194,8 @@ public class Player : MonoBehaviour {
                 break;
             }
         }
-        debugCube = new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2);
-        debugSize = new Vector3(scale.x, scale.y, scale.z);
+        //debugCube = new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2);
+        //debugSize = new Vector3(scale.x, scale.y, scale.z);
         Debug.Log("IsCollidingWithAnything: " + ((ret) ? "true" : "false"));
 
         return ret;
