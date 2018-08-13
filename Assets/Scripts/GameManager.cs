@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
     {
         GameObject gift = Instantiate(giftPrefab, dropOffPoint.position, Quaternion.identity);
         //gift.transform.localScale = new Vector3(gifts[giftIndex].width, 1, gifts[giftIndex].length);
-        var giftProperties = gift.GetComponent<PlaceableObject>();
+        var giftProperties = gift.transform.GetChild(0).GetComponent<PlaceableObject>();
         giftProperties.Properties = gifts[giftIndex];
         giftIndex++;
         if (giftIndex < gifts.Length)

@@ -51,9 +51,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4007394960780204}
+  - component: {fileID: 114166428068570298}
   m_Layer: 0
   m_Name: counter
-  m_TagString: Untagged
+  m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,3 +142,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1373141952562610}
   m_Mesh: {fileID: 4300000, guid: c6724cbadc3e5754082f66bb8822efa5, type: 3}
+--- !u!114 &114166428068570298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1822962237958628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d8c5a03c66c9140af57f1c40a5d2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1

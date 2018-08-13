@@ -247,7 +247,7 @@ public class Player : MonoBehaviour {
             carying = movable.gameObject;
             carying.transform.position = target.position;
             carying.transform.rotation = target.rotation;
-            carying.transform.localScale = Vector3.one * 0.3f;
+            carying.transform.localScale = Vector3.one * 0.0625f;
             carying.transform.SetParent(transform);
         }
         

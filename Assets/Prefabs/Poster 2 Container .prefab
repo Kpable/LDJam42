@@ -51,9 +51,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4144082347244886}
+  - component: {fileID: 114240989405042768}
   m_Layer: 0
   m_Name: poster2
-  m_TagString: Untagged
+  m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442504983690954}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 6, y: 2, z: 6}
+  m_LocalPosition: {x: 6, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4144082347244886}
@@ -141,3 +142,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1600774148768362}
   m_Mesh: {fileID: 4300000, guid: ee34781e9cf901e498c5c4de83cd49a0, type: 3}
+--- !u!114 &114240989405042768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636696112802570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d8c5a03c66c9140af57f1c40a5d2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
