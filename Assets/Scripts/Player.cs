@@ -59,8 +59,10 @@ public class Player : MonoBehaviour {
             validatorPos.x = Mathf.RoundToInt(target.position.x + transform.forward.x);
             validatorPos.z = Mathf.RoundToInt(target.position.z + transform.forward.z);
             validator.transform.position = validatorPos;
-            
-            RotateValidator();
+            PlacableOn[] canBePlacedOn = carying.GetComponent<PlaceableObject>().Properties.placeables;
+
+            if (Array.IndexOf(canBePlacedOn, PlacableOn.Wall) != -1)
+                RotateValidator();
             Validate();
             
         }
