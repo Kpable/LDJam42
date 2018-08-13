@@ -59,8 +59,11 @@
 (Just gotta love weird math)
 ![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/weird-math.gif)
 
+### Transitioning from blocks to.. umm.. colored blocks 
+![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/apartment.gif)
+
 ### Sure this will fit somewhere 
 ![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/big-plant.gif)
 
-### Transitioning from blocks to.. umm.. colored blocks 
-![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/apartment.gif)
+### Or this
+![game progress](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/present.gif)
