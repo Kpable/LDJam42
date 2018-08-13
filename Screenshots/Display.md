@@ -1,0 +1,1 @@
+![Day 1 Example](https://github.com/Kpable/LDJam42/blob/develop/Screenshots/furniture%20partial%20invalid%20editor.gif)

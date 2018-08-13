@@ -129,7 +129,11 @@ public class Player : MonoBehaviour {
                         pointsToCheck[index] = new Vector3(pos.x + x + 0.5f, pos.y - 0.25f, pos.z + z + 0.5f);
                     else
                         pointsToCheck[index] = new Vector3(pos.x + x + 0.5f, pos.y - 1, pos.z + z + 0.5f);
-                    //Debug.Log("pointToCheck: " + pointsToCheck[x + z]);
+                    Debug.Log("pointToCheck: " + pointsToCheck[index]);
+
+                    pointsToCheck[index] = pos + (Quaternion.AngleAxis(validator.transform.eulerAngles.y, Vector3.up) * (pointsToCheck[index] - validator.transform.position));
+                    Debug.Log("pointToCheck rotated by" + validator.transform.eulerAngles.y + ": " + pointsToCheck[index]);
+
                     index++;
                 }
             }
