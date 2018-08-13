@@ -122,12 +122,14 @@ public class Player : MonoBehaviour {
 
         Vector3[] pointsToCheck = new Vector3[Mathf.RoundToInt(scale.x * scale.z)];
         //Debug.Log("Points to check: " + pointsToCheck.Length);
+        int index = 0;
         for (int x = 0; x < scale.x; x++)
         {
             for (int z = 0; z < scale.z; z++)
             {
-                pointsToCheck[x+z] = new Vector3(pos.x+x, pos.y - 1, pos.z+z);
+                pointsToCheck[index] = new Vector3(pos.x+x, pos.y - 1, pos.z+z);
                 //Debug.Log("pointToCheck: " + pointsToCheck[x + z]);
+                index++;
             }            
         }
 
