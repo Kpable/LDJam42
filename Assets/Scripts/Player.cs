@@ -86,118 +86,109 @@ public class Player : MonoBehaviour {
         Color validationColor = new Color(Color.green.r, Color.green.g, Color.green.b, 0.4f);
 
         bool valid = true;
-        for (int i = 0; i < props.placeables.Length; i++)
+
+        if (IsCollidingWithAnything(scale, pos) || !IsOverPlaceableOnSurface(scale, pos))
         {
-            switch (props.placeables[i])
-            {
-                case PlacableOn.Floor:
-                    // Check area
-                    //IsCollidingWithAnything(scale, pos);
-                    //// Check area below
-                    //IsOverFloor(scale, pos);
-                    if(IsCollidingWithAnything(scale, pos) || !IsOverFloor(scale, pos))
-                    {
-                        validationColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.4f);
-                        valid = false;
-                    }                   
-                    
-                    break;
-                case PlacableOn.Furniture:
-                    if (IsCollidingWithAnything(scale, pos) || !IsOverFloor(scale, pos))
-                    {
-                        validationColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.4f);
-                        valid = false;
-                    }
-                    break;
-                case PlacableOn.Wall:
-                    break;
-                case PlacableOn.Shelf:
-                    break;
-                default:
-                    break;
-            }
+            validationColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.4f);
+            valid = false;
         }
+       
         validator.transform.GetChild(0).GetComponent<Renderer>().material.color = validationColor;
         canPlace = valid;
     }
 
-    private bool IsOverFloor(Vector3 scale, Vector3 pos)
+    private bool IsOverPlaceableOnSurface(Vector3 scale, Vector3 pos)
     {
         bool ret = false;
 
-        Vector3[] pointsToCheck = new Vector3[Mathf.RoundToInt(scale.x * scale.z)];
-        //Debug.Log("Points to check: " + pointsToCheck.Length);
-        int index = 0;
-        for (int x = 0; x < scale.x; x++)
-        {
-            for (int z = 0; z < scale.z; z++)
-            {
-                pointsToCheck[index] = new Vector3(pos.x+x + 0.5f, pos.y - 1, pos.z+z + 0.5f);
-                //Debug.Log("pointToCheck: " + pointsToCheck[x + z]);
-                index++;
-            }            
-        }
 
-        int validPoints = 0;
-        for (int i = 0; i < pointsToCheck.Length; i++)
+        PlacableOn[] canBePlacedOn = carying.GetComponent<PlaceableObject>().Properties.placeables;
+        foreach (var placedOnAble in canBePlacedOn)
         {
-            Collider[] hits = Physics.OverlapBox(pointsToCheck[i], Vector3.one * 0.3f);
-            //Debug.Log("found " + hits.Length + " hits ");
 
-            //for (int u = 0; u < hits.Length; u++)
-            //{
-            //    Debug.Log("hit " + hits[u].name);
-            //}
-            debugCube = pointsToCheck[i];
-            debugSize = Vector3.one * 0.3f;
-            if (hits.Length == 0) break;
-            for (int j = 0; j < hits.Length; j++)
+            Vector3[] pointsToCheck = new Vector3[Mathf.RoundToInt(scale.x * scale.z)];
+            //Debug.Log("Points to check: " + pointsToCheck.Length);
+            int index = 0;
+            for (int x = 0; x < scale.x; x++)
             {
-                var surface = hits[j].GetComponent<Surface>();
-                if(surface != null)
+                for (int z = 0; z < scale.z; z++)
                 {
-                    bool validSurface = false;
-                    PlacableOn[] canBePlacedOn = carying.GetComponent<PlaceableObject>().Properties.placeables;
-                    for (int k = 0; k < canBePlacedOn.Length; k++)
+                    if(placedOnAble == PlacableOn.Wall)
+                        pointsToCheck[index] = new Vector3(pos.x + x + 0.5f, pos.y, pos.z + z + 0.5f);
+                    else
+                        pointsToCheck[index] = new Vector3(pos.x + x + 0.5f, pos.y - 1, pos.z + z + 0.5f);
+                    //Debug.Log("pointToCheck: " + pointsToCheck[x + z]);
+                    index++;
+                }
+            }
+
+            int validPoints = 0;
+            for (int i = 0; i < pointsToCheck.Length; i++)
+            {
+                Collider[] hits = Physics.OverlapBox(pointsToCheck[i], Vector3.one * 0.3f);
+                //Debug.Log("found " + hits.Length + " hits ");
+
+                //for (int u = 0; u < hits.Length; u++)
+                //{
+                //    Debug.Log("hit " + hits[u].name);
+                //}
+                debugCube = pointsToCheck[i];
+                debugSize = Vector3.one * 0.3f;
+                if (hits.Length == 0) break;
+                for (int j = 0; j < hits.Length; j++)
+                {
+                    var surface = hits[j].GetComponent<Surface>();
+                    if (surface != null)
                     {
-                        if(surface.type == canBePlacedOn[k])
+                        //bool validSurface = false;
+                        //PlacableOn[] canBePlacedOn = carying.GetComponent<PlaceableObject>().Properties.placeables;
+                        //for (int k = 0; k < canBePlacedOn.Length; k++)
+                        //{
+                        //if(surface.type == canBePlacedOn[k])
+                        if (surface.type == placedOnAble)
                         {
-                            validSurface = true;
+                            //validSurface = true;
+                            //break;
+                        //}
+                        //}
+                        //if at least one valid surface was found for this point, we're good
+                        //if (validSurface)
+                        //{
+                            validPoints++;
                             break;
                         }
                     }
-                    //if at least one valid surface was found for this point, we're good
-                    if ( validSurface )
-                    {
-                        validPoints++;
-                        break;
-                    }
                 }
             }
+            ret = validPoints == pointsToCheck.Length;
+            if (ret) break;
         }
-        ret = validPoints == pointsToCheck.Length;
 
-        Debug.Log("IsOverFLoor: " + ((ret) ? "true" : "false"));
+        Debug.Log("IsOverPlaceableOnSurface: " + ((ret) ? "true" : "false"));
         return ret; 
     }
 
     private bool IsCollidingWithAnything(Vector3 scale, Vector3 pos)
     {
-        Collider[] hits = Physics.OverlapBox(new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2), new Vector3(scale.x / 2 - .01f, scale.y / 2 - .01f, scale.z / 2 - .01f));
         bool ret = false;
-        for (int j = 0; j < hits.Length; j++)
-        {
-            if (hits[j].CompareTag("Movable"))
-            {
-                //Debug.Log("found " + j + " " + hits[j].name);
-                ret = true;
-                break;
-            }
-        }
-        //debugCube = new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2);
-        //debugSize = new Vector3(scale.x, scale.y, scale.z);
-        Debug.Log("IsCollidingWithAnything: " + ((ret) ? "true" : "false"));
 
+        PlacableOn[] canBePlacedOn = carying.GetComponent<PlaceableObject>().Properties.placeables;
+        foreach (var placedOnAble in canBePlacedOn)
+        {
+            Collider[] hits = Physics.OverlapBox(new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2), new Vector3(scale.x / 2 - .01f, scale.y / 2 - .01f, scale.z / 2 - .01f));
+            for (int j = 0; j < hits.Length; j++)
+            {
+                if (hits[j].CompareTag("Movable") && placedOnAble != PlacableOn.Wall)
+                {
+                    //Debug.Log("found " + j + " " + hits[j].name);
+                    ret = true;
+                    break;
+                }
+            }
+            //debugCube = new Vector3(pos.x + scale.x / 2, pos.y, pos.z + scale.z / 2);
+            //debugSize = new Vector3(scale.x, scale.y, scale.z);
+            Debug.Log("IsCollidingWithAnything: " + ((ret) ? "true" : "false"));
+        }
         return ret;
     }
 
