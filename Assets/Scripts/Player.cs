@@ -31,16 +31,25 @@ public class Player : MonoBehaviour {
         transform.position = pos;
 
         Ray ray;
-        RaycastHit hit;
+        //RaycastHit hit;
         Vector3 mousePos = Input.mousePosition;
 
         ray = Camera.main.ScreenPointToRay(mousePos);
-        if (Physics.Raycast(ray, out hit))
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    if (hit.collider.name == "Floor")
+        //    {
+        //        //Debug.Log("Mouse Hit:" + hit.point);
+        //        transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+        //    }
+        //}
+
+        RaycastHit[] camRayHits = Physics.RaycastAll(ray);
+        foreach (var col in camRayHits)
         {
-            if (hit.collider.name == "Floor")
+            if (col.collider.name == "Floor")
             {
-                //Debug.Log("Mouse Hit:" + hit.point);
-                transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+                transform.LookAt(new Vector3(col.point.x, transform.position.y, col.point.z));
             }
         }
 
@@ -50,9 +59,10 @@ public class Player : MonoBehaviour {
             validatorPos.x = Mathf.RoundToInt(target.position.x + transform.forward.x);
             validatorPos.z = Mathf.RoundToInt(target.position.z + transform.forward.z);
             validator.transform.position = validatorPos;
-
+            
+            RotateValidator();
             Validate();
-            //RotateValidator();
+            
         }
         // pick up/putdown
         if (Input.GetMouseButtonDown(0))
@@ -185,24 +195,13 @@ public class Player : MonoBehaviour {
 
     private void RotateValidator()
     {
+        validator.transform.LookAt(transform);
+
         Vector3 rot = validator.transform.eulerAngles;
-        // to the left of the player
-        if (validator.transform.position.x < transform.position.x)
-        {
-            rot.y = -90;
-        }
-        else if (validator.transform.position.x > transform.position.x)
-        {
-            rot.y = 90;
-        }
-        if (validator.transform.position.y < transform.position.y)
-        {
-            rot.y = 0;
-        }
-        else if (validator.transform.position.y > transform.position.y)
-        {
-            rot.y = 180;
-        }
+
+        rot.x = 0;
+        rot.y = Mathf.Round(rot.y / 90) * 90;
+        rot.z = 0;
         validator.transform.eulerAngles = rot;
 
     }
